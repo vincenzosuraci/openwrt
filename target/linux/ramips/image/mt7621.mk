@@ -711,17 +711,17 @@ endef
 TARGET_DEVICES += comfast_cf-e390ax
 
 define Device/comfast_cf-ew72-v2
-    $(Device/dsa-migration)
-    $(Device/uimage-lzma-loader)
-    IMAGE_SIZE := 15808k
-    DEVICE_VENDOR := COMFAST
-    DEVICE_MODEL := CF-EW72 V2
-    DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615e kmod-mt7663-firmware-ap \
+  $(Device/dsa-migration)
+  $(Device/uimage-lzma-loader)
+  IMAGE_SIZE := 15808k
+  DEVICE_VENDOR := COMFAST
+  DEVICE_MODEL := CF-EW72 V2
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615e kmod-mt7663-firmware-ap \
         -uboot-envtools
-    IMAGES += factory.bin
-    IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | \
+  IMAGES += factory.bin
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | \
         check-size | append-metadata
-    IMAGE/factory.bin := append-kernel | append-rootfs | pad-rootfs | check-size
+  IMAGE/factory.bin := append-kernel | append-rootfs | pad-rootfs | check-size
 endef
 TARGET_DEVICES += comfast_cf-ew72-v2
 
@@ -2635,6 +2635,14 @@ define Device/netis_wf2881
 	-uboot-envtools
 endef
 TARGET_DEVICES += netis_wf2881
+
+define Device/newfast_nf-a882
+  $(Device/comfast_cf-ew72-v2)
+  DEVICE_VENDOR := Newfast
+  DEVICE_MODEL := A882
+  DEVICE_DTS := mt7621_newfast_a882
+endef
+TARGET_DEVICES += newfast_nf-a882
 
 define Device/openfi_5pro
   $(Device/dsa-migration)
