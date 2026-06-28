@@ -7,8 +7,8 @@
 #include <dt-bindings/leds/common.h>
 
 / {
-	compatible = "comfast,cf-ew72-v2", "mediatek,mt7621-soc";
-	model = "COMFAST CF-EW72 V2";
+	compatible = "newfast,a882", "mediatek,mt7621-soc";
+	model = "Newfast NF-A882";
 
 	// There are at least two HW variants of cf-ew72-v2:
 	// With external RAM chip and with integrated RAM (RAM chip not soldered).

@@ -111,6 +111,7 @@ ramips_setup_interfaces()
 	lenovo,newifi-d1|\
 	mikrotik,routerboard-m33g|\
 	mts,wg430223|\
+	newfast,a882|\
 	oraybox,x3a|\
 	renkforce,ws-wn530hp3-a|\
 	xiaomi,mi-router-3g|\
