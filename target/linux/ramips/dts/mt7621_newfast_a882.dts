@@ -32,47 +32,25 @@
 	leds {
 		compatible = "gpio-leds";
 
-		// The only both visible and controllable indicator is wifi LED.
-		// CF-EW72 have 8 LEDs:
-		//  "wlan" is the only LED is controllable with GPIO and have proper hole in shell.
-		//  "power", "wan" and "lan" LEDs have proper holes in shell, but can not be controlled with GPIO
-		//  "hidden_led_2" and "hidden_led_4" can be controlled with GPIO, but have no proper holes in shell
-		//     "hidden_led_2" is between POWER and WAN LEDs
-		//     "hidden_led_4" is between WAN and LAN LEDs
-		//  "noconn_led_6" and "noconn_led_8" exist, but have no proper holes in shell and not controlled:
-		//     "noconn_led_6" is between LAN and WLAN LEDs
-		//     "noconn_led_8" is after WLAN LED
-
-		// LED "hidden_led_2" between POWER and WAN LEDs is controllable with GPIO, but it has no proper hole in shell;
-		// LED "hidden_led_4" between WAN and LAN LEDs is controllable with GPIO, but it has no proper hole in shell;
-
-		// TABLE of LEDs. All leds are blue.
-		//
-		// Place (WAN->ANT) | Num | GPIO | LED name (LuCI)   | Note
-		// -----------------|-----|-----------------------------------------------------------------------------------------
-		//            power | 1   |      |                   | POWER LED. Not controlled with GPIO.
-		//     hidden_led_2 | 2   | 13   | blue:hidden_led_2 | This LED does not have proper hole in shell.
-		//              wan | 3   |      |                   | WAN LED. Not controlled with GPIO.
-		//     hidden_led_4 | 4   | 16   | blue:hidden_led_4 | This LED does not have proper hole in shell.
-		//              lan | 5   |      |                   | LAN LED. Not controlled with GPIO.
-		//     noconn_led_6 | 6   |      |                   | Not controlled with GPIO, possibly not connected
-		//             wlan | 7   | 15   | blue:wlan         | WLAN LED. Wireless indicator.
-		//     noconn_led_8 | 8   |      |                   | Not controlled with GPIO, possibly not connected
-
-		hidden_led_2_blue {
-			label = "blue:hidden_led_2";
-			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
+		wan {
+			label = "blue:wan";
+			function = LED_FUNCTION_WAN
+			color = <LED_COLOR_ID_BLUE>
+			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 		};
 
-		hidden_led_4_blue {
-			label = "blue:hidden_led_4";
-			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
+		lan {
+			label = "blue:lan";
+			function = LED_FUNCTION_LAN;
+			color = <LED_COLOR_ID_BLUE>;
+			gpios = <&gpio 15 GPIO_ACTIVE_HIGH>;
 		};
 
-		wlan_blue {
+		wlan {
+			label = "blue:wlan";
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_BLUE>;
-			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 	};
 
@@ -156,6 +134,7 @@
 
 &pcie {
 	status = "okay";
+	reset-gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 };
 
 &pcie0 {
@@ -186,6 +165,7 @@
 
 &switch0 {
 	mediatek,mcm;
+	reset-gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 	ports {
 		wan: port@0 {
 			status = "okay";
