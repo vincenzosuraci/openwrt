@@ -123,7 +123,7 @@
 };
 
 &gpio {
-	groups = "i2c", "uart2", "uart3", "sdhci", "jtag";
+	groups = "i2c", "uart2", "uart3", "sdhci", "jtag", "mdio";
 	function = "gpio";
 };
 
@@ -164,8 +164,10 @@
 };
 
 &switch0 {
+	compatible = "mediatek,mt7530";
 	mediatek,mcm;
-	reset-gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
+	resets = <&sysc 2>;
+	reset-names = "mcm";
 	ports {
 		wan: port@0 {
 			status = "okay";
